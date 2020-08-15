@@ -1,0 +1,3 @@
+.PHONY: development
+development:
+	bundle exec jekyll s

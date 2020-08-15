@@ -23,6 +23,8 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://the-oswalds.de" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: ""
 # github_username:  ""
+instagram_username: thee.oswalds
+rss: rss
 
 # Build settings
 markdown: kramdown
