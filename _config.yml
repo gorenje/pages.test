@@ -24,6 +24,7 @@ url: "https://the-oswalds.de" # the base hostname & protocol for your site, e.g.
 # twitter_username: ""
 # github_username:  ""
 instagram_username: thee.oswalds
+vimeo_username: oswalds
 rss: rss
 
 # Build settings
