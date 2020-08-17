@@ -4,10 +4,6 @@ title: About
 permalink: /about/
 ---
 
-The Oswalds City Guide in Stop Motion
+The Oswalds are two characters experimenting with stop motion and storytelling.
 
-The adventures of Osvita and Osmond Oswald. Follow these tiny
-explorers to their favourite weird and wonderful hidden spots
-around the globe.
-
-The city guide for the unusal suspects.
+<img title='the oswalds jungle' src="/assets/oswalds-jungle-trip.jpg" width="600px"/>

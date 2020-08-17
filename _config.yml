@@ -25,7 +25,10 @@ url: "https://the-oswalds.de" # the base hostname & protocol for your site, e.g.
 # github_username:  ""
 instagram_username: thee.oswalds
 vimeo_username: oswalds
-rss: rss
+spotify_username: The Oswalds
+spotify_userid: mcpwl76ju7ysqurjykx7akoho
+
+rss: Feed Me
 
 # Build settings
 markdown: kramdown
