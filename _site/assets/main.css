@@ -1,3 +1,6 @@
+@font-face {
+  font-family: SailorsDiarySans;
+  src: url("/assets/SailorsDiarySans.otf") format("opentype"); }
 /**
  * Reset some basic elements
  */
@@ -11,7 +14,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font: 400 16px/1.5 -apple-system, SailorsDiarySans, BlinkMacSystemFont, "Sailors Diary Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: #111;
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%;
