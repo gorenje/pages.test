@@ -12,4 +12,4 @@ Follow Osvita and Osmond Oswald as they
 explore their favourite weird and wonderful hidden spots
 around the globe.
 
-<img title='the oswalds at farmers market' src="/assets/oswalds-farmers-market.jpg" width="600px"/>
+<img title='the oswalds at farmers market' src="/assets/640/oswalds-farmers-market.jpg" width="640px"/>

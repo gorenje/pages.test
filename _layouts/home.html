@@ -1,5 +1,6 @@
 ---
 layout: default
+list_title: Episodes
 ---
 
 <div class="home">
@@ -10,7 +11,7 @@ layout: default
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+    <h2 class="post-list-heading">{{ page.list_title | default: "Episodes" }}</h2>
     <ul class="post-list">
       {%- for post in site.posts -%}
       <li>
@@ -22,13 +23,17 @@ layout: default
           </a>
         </h3>
         {%- if site.show_excerpts -%}
+          {%- if post.thumb_image -%}
+            <a href='{{ post.url | relative_url }}'>
+              <img width='400px' class='margin-bottom' src='/assets/400/{{ post.thumb_image }}'/>
+            </a>
+          {%- endif -%}
           {{ post.excerpt }}
         {%- endif -%}
       </li>
       {%- endfor -%}
     </ul>
 
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
   {%- endif -%}
 
 </div>
