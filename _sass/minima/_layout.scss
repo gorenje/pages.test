@@ -129,6 +129,20 @@
   width: calc(100% + (#{$spacing-unit} * 4));
 }
 
+@include media-query($on-laptop) {
+    .footer-col-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@include media-query($on-palm) {
+    .footer-col-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
 .footer-col {
   float: left;
   margin-bottom: $spacing-unit / 2;
