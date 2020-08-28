@@ -9,6 +9,7 @@ build:
 .PHONY: images
 images:
 	@mkdir -p assets/640
+	@mkdir -p assets/400
 	for n in assets/images/* ; do \
      if [ ! -f assets/640/$$(basename $${n}) ] ; then \
         convert $${n} -resize 640x assets/640/$$(basename $${n}); \
