@@ -7,12 +7,10 @@ layout: home
 
 Oswalds Stopmotion City Guide for the Unusual Suspects.
 
-
 Follow Osvita and Osmond Oswald as they
 explore their favourite weird and wonderful hidden spots
 around the globe.
 
-<video width="640" height="360" autoplay controls>
-  <source src="assets/clapperboard.mp4" type="video/mp4">
-  <img title='the oswalds at farmers market' src="/assets/640/oswalds-farmers-market.jpg" width="640px"/>
-</video>
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/456931944" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+<p class='margin-top'></p>

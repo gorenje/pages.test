@@ -18,3 +18,9 @@ images:
         convert $${n} -resize 400x assets/400/$$(basename $${n}); \
      fi ; \
   done
+
+.PHONY: deploy
+deploy: images build
+	git add .
+	git commit -a -m "Auto Commit of $$(date)"
+	git push github p.a.g.e.s
