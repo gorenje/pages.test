@@ -17,3 +17,7 @@ This city guide in stop motion is a guide for people who don't like guides
 and will definitely inspire you to see the world from a different angle.
 
 <img title='the oswalds jungle' src="/assets/640/oswalds-jungle-trip.jpg" width="640px"/>
+
+<a href="https://vimeo.com/472114735">Making of The Oswalds at Vimeo</a>.
+
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/472114735" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
