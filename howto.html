@@ -1,0 +1,168 @@
+---
+layout: page-howto
+title: HowTo
+permalink: /howto/
+---
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Building a Stop Motion Studio</title>
+</head>
+<body>
+<h1>A Recipe for Building a Stop Motion Studio</h1>
+
+<p>How I came to doing stop motion is another story, suffice to say that, during the March 2020 lockdown (European timezone here), my partner and I decided to setup a stop motion studio ... in the room formally-known as the living-room!</p>
+
+<p>Here comes the self-promote: our films can be viewed at <a href="https://the-oswalds.de">the-oswalds.de</a>.</p>
+
+<p>How I built a setup for doing <a href="https://en.wikipedia.org/wiki/Stop_motion">stop motion</a> animation. This was a labour of love that took several months to reach this point. A lot of learnings and optimisations were made a long the way.</p>
+
+<p>I will be writing this in the first-person singular not because I'm an egoist, rather my partner is the artistic part in our setup and I happen to be the techie! I could not write about our beautiful sets since those are creations that only my partner can make and describe. Which also represents an intrinsical part of how we work: division of responsibility!</p>
+
+<p>Also this write-up will get very technical in parts ... I will be using a lot of <a href="https://acronyms.thefreedictionary.com/3LA">3LA</a>s, such as DNS, NAS, DMX, NFS, USB, SSH, SSD, <a href="http://www.bigredbutton.eu/">BRD</a>, LED, ... (at this point, even I'm getting sick of listing them all)! But I will try to provide context and structure so that it might also make sense :)</p>
+
+<p>Prep time: about 8 Months, give or take. </p>
+
+<p>Difficulty: Painful and Frustrating :) Stop motion, as everyone says, is an artform requiring a good serving of patience; equal amounts of eye-for-detail and dedication!</p>
+
+<p>Serves: Lots!</p>
+
+<h2>Ingredients</h2>
+
+<ul>
+<li>6x Raspberry Pis (a mix of Pi4 and Pi3s)</li>
+<li>5x <a href="https://en.wikipedia.org/wiki/DMX512">DMX</a>-based Strobe lights (any number of strobes will be sufficient, important is to have good, steady light all day round)</li>
+<li>2x <a href="https://www.nikonusa.com/en/nikon-products/dslr-cameras/overview.page">Nikon DSLR</a> cameras and lenses (one will suffice)</li>
+<li>2x Netgear GigaBit Hubs (any old hub will do but make sure it's at least a gigabit hub)</li>
+<li>2x SanDisk Extreme SSD (250GB + 500GB - Make sure that your storage is USB3 Conform, i.e. really does have increased read + write speeds).</li>
+<li>1x Raspberry Mini (required if you are planning to connect strobes)</li>
+<li>1x <a href="http://www.bitwizard.nl/shop/raspberry-pi?product_id=154">DMX Interface for Raspberry</a> (for this you will need a raspberry mini)</li>
+<li>1x Monitor for image previews (for showing the last image taken)</li>
+<li>1x <a href="http://www.bigredbutton.eu/">Big Red Button</a> for deleting the last image taken (I actually had one lying around, so I didn't purchase this for 95 Euros!)</li>
+<li>1x <a href="https://www.sewingmachinereporter.com/foot-pedal/">Sewing Machine Pedal</a> for taking images (Need to take it apart to connect to a raspberry)</li>
+<li>Various LEGO(TM) motors for turning things</li>
+<li>Extra computing power for rendering videos (in my case, that's my old 2012 macbook pro)</li>
+<li>Cabling in various lengths and forms: DMX cable, Ethernet cable, USB3 extension cables and power cables and extension boards.</li>
+<li>And various bits and pieces for gluing this all together, including a lot of Python3 code!</li>
+</ul>
+
+<h2>Nutrition Facts</h2>
+
+<p><strong>--TODO--&gt;</strong> The recipe focuses on some main goals:</p>
+
+<ul>
+<li>Speed (50%), stop motion requires taking a lot of photos (think of a 25 frame-per-second film ... that's 25 frames that need to be taken for one second!). If I save one second per frame, then I've saved a lot of time over an entire film.</li>
+<li>Easy-of-use (35%), providing the animator with everything to make their jobs easy.</li>
+<li>Automation (15%), everything needs to be controlled by a raspberry so that it can be programmable controlled.</li>
+</ul>
+
+<h2>Steps</h2>
+
+<p>How to make a delicious warm studio with all-round happiness.</p>
+
+<h3>Step 1: Storage</h3>
+
+<p>If you are going to work with DSLR cameras, then you want to have the highest resolution. Using the highest possible resolution gives you more flexibility in post production: cropping and zooming are possible without quality loss. In addition, the final product will far more captivating. </p>
+
+<p>The drawback is that image sizes can be up to 13 MB per frame. Which makes for a lot of storage per film. Thankfully storage is cheap, so per-se this isn't an issue. However we want to immediately view images taken, so it becomes a matter of: taking the image, transferring the image from the camera to a central storage, retrieving the image and transferring to screens - as fast as possible.</p>
+
+<p>Initially we used USB2 and WiFi but this became painfully slow. Especially since we used multiple cameras, i.e., each frame was simultaneous photographed from different angles by multiple cameras.</p>
+
+<p>To improve this performance, I started using a Raspberry 4 with USB3 SanDisk SSDs. Raspberry 4 since it's the first generation of raspberries that have gigabit ethernet connectors: RPi3 do 100Mbit and RPi3+ do 330Mbit and this is noticeable in our setup! </p>
+
+<p>Beware that a lot of USB3 storage devices claim to do USB3 but don't deliver. A good place to look for storage benchmarks for Raspberries is <a href="https://storage.jamesachambers.com/">James Chambers site</a> which provides community generated benchmarks for both SSDs and MicroSDs in combination with various Raspberries models.</p>
+
+<p>Another learning was that USB-Sticks don't perform as well use SSD Hard-drives. Perhaps I was naive here but it's really true, USB sticks aren't good for regularly reading and writing, as required by stop motion studio.</p>
+
+<p>Ensure that your ethernet cable also supports gigabit hubs. Apparently there are different categories of cable and at a minimum <a href="https://www.howtogeek.com/70494/what-kind-of-ethernet-cat-5e6a-cable-should-i-use/">Category 5e</a> is required for gigabit networks. I also didn't go for 10 Gigabit because the hubs are more expensive and the Raspberries only do 1 Gigabit, so they will always limit write speeds.</p>
+
+<p>So, what is the end result all of this? Write speeds directly to the disks are in the order of 160MB/s and via the ethernet cable they are 125MB/s (which is expected since 1Gigabit divided by eight is ....!)</p>
+
+<h3>Step 2: Lights</h3>
+
+<p>Stop motion requires constant and even light sources, natural light is not desirable. Also lights that flicker aren't good, even if you don't notice the flickering, it becomes apparent on film.</p>
+
+<p>We are using dimmable LED colour strobe lights but be careful when purchasing LED strobe lights. If you purchases cheap ones (e.g. Ibiza) then you will have problems dimming the strobes. The <a href="https://en.audiofanzine.com/misc-traditional-projector/ibiza-light/lpr-012led/medias/pictures/">Ibiza</a> flickers noticeably when dimming.</p>
+
+<p>Our second purchase were two <a href="https://www.cameolight.com/en/solutions/dj-musicians/static-lighting/par-lights/2283/flat-par-tri-3w-ir-wh">Cameos Flat PAR Lights</a> which can be dimmed without flickering.</p>
+
+<p>Combining <a href="http://www.bitwizard.nl/shop/raspberry-pi?product_id=154">DMX Interface</a> with an <a href="https://www.openlighting.org/ola/tutorials/ola-on-raspberry-pi/">OLA Daemon</a>, we have full control of all our strobes. On top of that, we use the <a href="https://github.com/MattIPv4/PyDMXControl">PyDMXControl</a> package to better control individual strobes (called &quot;<a href="https://www.sweetwater.com/sweetcare/articles/understanding-dmx/">fixtures</a>&quot; in technical terms). Each strobe has it is own <a href="https://open-fixture-library.org/">fixture description</a>. Each fixture has a number of channels and an address. Each channel is an eight bit value. DMX supports 512 channels and a fixture can take anything between 1 and <a href="https://onyxfixturefinder.com/#SearchMode=exact&amp;DisplayMode=0&amp;FullParam=0&amp;MaxChannels=000&amp;Manufacturer=any&amp;FixtureName=any&amp;count=020&amp;ch1=any&amp;ch2=any&amp;ch3=any&amp;ch4=any&amp;ch5=any&amp;ch6=any&amp;ch7=any&amp;ch8=any&amp;ch9=any&amp;ch10=any&amp;ch11=any&amp;ch12=any&amp;ch13=any&amp;ch14=any&amp;ch15=any&amp;ch16=any&amp;ch17=any&amp;ch18=any&amp;ch19=any&amp;ch20=any">lots of</a> channels, depending on it is functionality and setup. </p>
+
+<p>The advantage of using <a href="https://en.wikipedia.org/wiki/DMX512">DMX</a> based lighting is that it is configurable and hence reproducible. So that we can store the lightening settings for one scene, while filming a second scene, then going back to the exact same lightening settings to continue filming on the first scene.</p>
+
+<p>In addition to all of that, DMX is designed to be extended, i.e., adding another strobe light or remove one is absolutely no issue.</p>
+
+<h3>Step 3: Cameras</h3>
+
+<p>Started out with Webcams (Philips and Raspberry Camera) but both have the problem that the image quality was not consistent, so there was a lot of <a href="https://nottriangles.com/animation/eliminate-flicker-in-stop-motion/">flickering</a>.</p>
+
+<p>When interfacing with DSLR Cameras, there is only one go-to package: <a href="http://gphoto.org/">gphoto2</a>! It provides and unified interface on top of the <a href="https://en.wikipedia.org/wiki/Picture_Transfer_Protocol">Picture Transfer Protocol (PTP)</a> for various cameras. Before purchasing a DSLR, check that it is <a href="http://gphoto.org/proj/libgphoto2/support.php">supported by gphoto2</a>.</p>
+
+<p>Gphoto2 allows configuration of all the important features of a DSLR: shutter-speed, white-balance, iso-speed, resolution and f-number. So this provides reproducibility when using different DSLR cameras.</p>
+
+<ul>
+<li>support multiple cameras for each frame</li>
+</ul>
+
+<h3>Step 4: LEGO(TM) Motors</h3>
+
+<h3>Step 5: Action - putting it all together</h3>
+
+<ul>
+<li>Preview monitor and delete button</li>
+<li>Foot pedal and speakers</li>
+<li>Triggering LEGO(TM) Motors</li>
+<li>Rendering machine</li>
+<li>Davinic Resolve</li>
+<li>Each raspberry has it's own website and responsibilities for this i setup a DNS server and different network names. For example, if i want to connect to the raspberry that is currently hosting our Nikon D7100 camera, i do: <code>ssh nikon-d710</code>, to reach the strobes <code>open -a Safari http://strobes</code>, etc.</li>
+</ul>
+
+<h2>Misc Learnings</h2>
+
+<ul>
+<li><p>I have two separate electrical circuits (i.e. power): one for the lights and one for the raspberries. This allows me to switch off all the lights with one switch and not kill the power to the raspberries.</p></li>
+<li><p>Don't connect two or more DSLR cameras to a single raspberry. It would be possible to trigger both cameras in parallel, or rather it's not as simple as having a raspberry for each camera.</p></li>
+<li><p>Black curtains to have consistent light regardless when we film. Natural light causes changes in image quality that causes flickering between images, hence we need to use artificial light sources when taking frames.</p></li>
+<li><p>Nice neighbours that don't complain listening to 60's garage music at 4 in the morning.</p></li>
+<li><p>Have a storyboard in mind! Even if these aren't professional, have the scenes you want to film in your mind and plan ahead.</p></li>
+<li><p>Automation: Automatically dimming or changing colours of strobes before taking a frame.</p></li>
+</ul>
+
+<h2>The 'Whys?'</h2>
+
+<ul>
+<li><p>Why a pedal to capture frames? Would not a remote control be simpler? </p>
+
+<p>Basically there are two reasons, one is that an animator should make as few movements as possible to capture a frame - again, time and concentration are of the essence. Secondly, since the pedal is controlled by an Raspberry, it can also trigger motors, lights or projectors before triggering the cameras. </p></li>
+<li><p>But why a big red button to remove outtakes?</p>
+
+<p>Here we have a device which requires the animator to interrupt their flow and press a button. This makes sure that the animator is thinking about pressing the button (there is no confirmation for deletion) and secondly this is a physically different motion than capturing a frame.</p></li>
+</ul>
+
+<h2>Outlook</h2>
+
+<p>We are currently experimenting with 2D animation, specification collage and cut-outs. Here we're working with a <a href="https://www.usa.philips.com/c-p/PPX4350W_INT/picopix-pocket-projector">pocket beamer</a> for beaming outlines onto paper between frames. To make sure that the beamer image is only shown between frames, a servo motor (with a tiny flag) blocks the beamer before the cameras take frames.</p>
+
+<h2>Sourcing</h2>
+
+<p>We source all our gear from local shops, Amazon wasn't <em>directly</em> involved. Even if the shop where we purchase our gear sources from Amazon, we're still paying extra to support that shop. An incomplete list (for anyone living in Berlin):</p>
+
+<ul>
+<li><a href="https://segor.de">Segor</a> is a good provider of everything electronic, i.e. relays, raspberries, cables and power supplies.</li>
+<li><a href="https://www.reichelt.com">Reichelt</a> if Segor doesn't have it, then Reichelt will!</li>
+<li><a href="http://onkel-philipp.de">Onkel Philipp</a> is a good source of Lego(TM) and set props.</li>
+<li><a href="https://www.conrad.com">Conrad</a> although not as good quality as Segor or Reichelt, they still have good selection of &quot;stuff&quot;!</li>
+<li><a href="https://www.fotobraune.berlin">Foto Braune</a> is a good source of secondhand Camera gear</li>
+<li><a href="https://www.justmusic.de">Just Music</a> is great for lighting and music of course!</li>
+<li><a href="https://www.modulor.de/en/">Modulor</a> is the source for building sets and characters. Although rather pricey, they are also a good source of inspiration.</li>
+<li><a href="https://www.yelp.com/biz/hobbyshop-wilhelm-rüther-berlin-2">Hobby Rüther</a> which the go-to store for quick fix of set builing!</li>
+<li><a href="https://www.boesner.com">Boesner</a> which is similar to Modulor but more focused on basic art materials, i.e. paints, tools and pens!</li>
+<li><a href="https://www.ebay-kleinanzeigen.de/anzeigen/">eBay Kleinanzeigen</a> is also good source of peer-to-peer used products.</li>
+<li><a href="https://www.solid-earth.de">Solid Earth</a> for digital prints for our backgrounds.</li>
+<li><a href="https://www.csv-copyshop-berlin.de/">CSV</a> for stickers and large prints.</li>
+</ul>
+
+<p>Admittedly, none of these places will - hopefully - not close any time soon without our support but without their support, we couldn't do what we love!</p>
+</body>
+</html>
