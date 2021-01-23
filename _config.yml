@@ -23,11 +23,11 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://the-oswalds.de" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: ""
 # github_username:  ""
-instagram_username: thee.oswalds
+# instagram_username: thee.oswalds
 vimeo_username: oswalds
 spotify_username: The Oswalds
 spotify_userid: mcpwl76ju7ysqurjykx7akoho
-facebook_username: Thee.Oswalds
+# facebook_username: Thee.Oswalds
 youtube_channel_id: "UC3hzKyjUcDIuqP8iR5K8dmQ"
 youtube_username: The Oswalds
 spreadshirt_username: the.oswalds
