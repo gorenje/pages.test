@@ -13,28 +13,13 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: The Oswalds
-email: wir@the-oswalds.de
-description: >- # this means to ignore newlines until "baseurl:"
-  The adventures of Osvita and Osmond Oswald. Follow these tiny
-  explorers to their favourite weird and wonderful hidden spots
-  around the globe.
+title: Empty
+email: noreply@noreply.tld
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://the-oswalds.de" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://the-oswalds.de"
 # twitter_username: ""
 # github_username:  ""
-# instagram_username: thee.oswalds
-vimeo_username: oswalds
-spotify_username: The Oswalds
-spotify_userid: mcpwl76ju7ysqurjykx7akoho
-# facebook_username: Thee.Oswalds
-youtube_channel_id: "UC3hzKyjUcDIuqP8iR5K8dmQ"
-youtube_username: The Oswalds
-spreadshirt_username: the.oswalds
 
-show_excerpts: true
-
-rss: Feed Me
 
 # Build settings
 markdown: kramdown
